@@ -4,6 +4,7 @@ import Register from "./Pages/Register"
 import PrivateRoute from "./Utils/PrivateRoute";
 import Home from "./Pages/Home";
 import EditUser from "./Pages/EditUser";
+import LandingPage from "./Pages/LandingPage";
 
 
 function App() {
@@ -13,14 +14,17 @@ function App() {
     <>
     
        
-       <Routes>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/register" element={<Register/>}/>
-          
-          <Route element={<PrivateRoute/>}/>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/edit-user" element={<EditUser/>}/>
-       </Routes>
+    <Routes>
+
+  <Route path="/" element={<LandingPage />} />
+  <Route path="/login" element={<Login />} />
+ <Route path="/register" element={<Register />} />
+  <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} /> 
+  <Route path="/edit-user" element={<PrivateRoute><EditUser /></PrivateRoute>} /> 
+
+</Routes>
+
+\
      
 
     </>

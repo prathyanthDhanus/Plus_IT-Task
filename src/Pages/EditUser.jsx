@@ -1,7 +1,6 @@
 import React from "react";
-import {  useState } from "react";
 import axios from "../Utils/Axios";
-
+import swal from "sweetalert";
 
 
 const EditUser = () => {
@@ -17,9 +16,9 @@ const EditUser = () => {
         };
         try {
           const response = await axios.put("/api/update-user", userData);
-          console.log(response);
+          
         } catch (error) {
-          setError("error ocurred:",error);
+            swal("Error!", "Something went wrong", "error");
         }
       };
 
@@ -30,9 +29,14 @@ const EditUser = () => {
           const response = await axios.delete(
             "api/delete-user"
           );
-          console.log(response);
+        
+          if(response.status===200){
+            await  swal("Success!", "User deleted successfully", "success");
+            navigate("/register")
+          }
+         
         } catch (error) {
-          console.error("Login error:", error);
+            swal("Error!", "Something went wrong", "error");
         }
       };
 
@@ -76,12 +80,7 @@ const EditUser = () => {
                   focus:outline-none focus:ring-indigo-500
                   focus:border-indigo-500 focus:z-10 sm:text-sm mb-3"
                 />
-              </div>
-            </div>
-
-            {/* {error && <p className="text-center mb-4">{error}</p>} */}
-            <div>
-              <button
+                <button
                 type="submit"
                 className="group mb-5 relative w-full flex justify-center
               py-2 px-4 border border-transparent text-sm font-medium
@@ -92,6 +91,11 @@ const EditUser = () => {
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3"></span>
                Save
               </button>
+              </div>
+            </div>
+                </form>
+            <div>
+              
               <button
                 onClick={handleDelete}
                 className="group relative w-full flex justify-center
@@ -104,7 +108,6 @@ const EditUser = () => {
                 Delete Account
               </button>
             </div>
-          </form>
         </div>
       </div>
     </div>

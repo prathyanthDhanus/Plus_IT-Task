@@ -9,26 +9,25 @@ const Login = () => {
 
  const navigate = useNavigate()
 
-  const handleLogin = async (e)=>{
- e.preventDefault();
-   const userData = {
-    email:e.target.email.value,
-    password:e.target.password.value
-   }
-  try{
-    const response = await axios.post("/api/login",userData)
-        
-    if(response.status===200){
+ const handleLogin = async (e) => {
+  e.preventDefault();
+  const userData = {
+    email: e.target.email.value,
+    password: e.target.password.value,
+  };
+  try {
+    const response = await axios.post("/api/login", userData);
+
+    if (response.status === 200) {
       localStorage.setItem('token', response.data.token);
-      await  swal("Success!", "User logged in successfully", "success");
-       navigate("/")
+      await swal("Success!", "User logged in successfully", "success");
+      navigate("/home");  // Navigate after successful login
     }
-    
-  }catch(error){
+  } catch (error) {
+    console.log(error)
     swal("Error!", "Something went wrong", "error");
   }
-
-  }
+};
 
  
 

@@ -2,19 +2,34 @@ import React from 'react'
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-
+import {useNavigate} from "react-router-dom"
 
 const navigation = [
-    { name: 'Dashboard', href: '#', current: true },
-    { name: 'Team', href: '#', current: false },
-    { name: 'Projects', href: '#', current: false },
-    { name: 'Calendar', href: '#', current: false },
+    { name: 'Home', href: '/', current: true },
+    { name: 'About Us', href: '#', current: false },
+    { name: 'Services', href: '#', current: false },
+    { name: 'Career', href: '#', current: false },
   ]
   
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
 const Navbar = () => {
+
+    const navigate = useNavigate();
+
+    const handleSignOut = async () => {
+        console.log("even product")
+        try {
+          localStorage.removeItem('token');
+          await swal("Success!", "You have been signed out successfully.", "success");
+          navigate("/register"); 
+        } catch (error) {
+          console.error("Error during sign out:", error);
+          swal("Error!", "Something went wrong during sign out.", "error");
+        }
+      };
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
     {({ open }) => (
@@ -37,8 +52,8 @@ const Navbar = () => {
               <div className="flex flex-shrink-0 items-center">
                 <img
                   className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                  alt="Your Company"
+                  src="https://w7.pngwing.com/pngs/621/196/png-transparent-e-commerce-logo-logo-e-commerce-electronic-business-ecommerce-angle-text-service.png"
+                  alt="E-Commerce"
                 />
               </div>
               <div className="hidden sm:ml-6 sm:block">
@@ -95,7 +110,7 @@ const Navbar = () => {
                     <Menu.Item>
                       {({ active }) => (
                         <a
-                          href="#"
+                          href="/edit-user"
                           className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                         >
                           Your Profile
@@ -115,8 +130,8 @@ const Navbar = () => {
                     <Menu.Item>
                       {({ active }) => (
                         <a
-                          href="#"
-                          className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                         onClick={handleSignOut}
+                          className={classNames(active ? 'bg-red-500 text-white' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer')}
                         >
                           Sign out
                         </a>
