@@ -23,7 +23,7 @@ const Navbar = () => {
         try {
           localStorage.removeItem('token');
           await swal("Success!", "You have been signed out successfully.", "success");
-          navigate("/register"); 
+          navigate("/"); 
         } catch (error) {
           console.error("Error during sign out:", error);
           swal("Error!", "Something went wrong during sign out.", "error");
