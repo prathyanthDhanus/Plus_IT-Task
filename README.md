@@ -4,7 +4,7 @@
 
 **Project Description:**
 
-*A concise and engaging description of what your application does and its key features.*
+* An application has been created for e-commerce purposes. It is a simple application that can be used by online businesses to facilitate their transactions. .*
 
 **Technologies Used:**
 
